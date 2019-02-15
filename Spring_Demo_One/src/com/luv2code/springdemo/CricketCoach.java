@@ -12,6 +12,7 @@ public class CricketCoach implements Coach{
 	public void setEmailAddress(String emailAddress) {
 		System.out.println("cricket coach inside setEmailAddress");
 		this.emailAddress = emailAddress;
+		System.out.println("hi");
 	}
 
 	public void setTeam(String team) {
