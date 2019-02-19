@@ -1,72 +1,87 @@
-// A Divide and Conquer based Java 
-// program for maximum subarray sum 
-// problem 
-import java.util.*; 
+import java.util.HashMap;
 
-class GFG { 
 
-	// Find the maximum possible sum in arr[] 
-	// such that arr[m] is part of it 
-	static int maxCrossingSum(int arr[], int l, 
-								int m, int h) 
-	{ 
-		// Include elements on left of mid. 
-		int sum = 0; 
-		int left_sum = Integer.MIN_VALUE; 
-		for (int i = m; i >= l; i--) 
-		{ 
-			sum = sum + arr[i]; 
-			if (sum > left_sum) 
-			left_sum = sum; 
-		} 
 
-		// Include elements on right of mid 
-		sum = 0; 
-		int right_sum = Integer.MIN_VALUE; 
-		for (int i = m + 1; i <= h; i++) 
-		{ 
-			sum = sum + arr[i]; 
-			if (sum > right_sum) 
-			right_sum = sum; 
-		} 
-
-		// Return sum of elements on left 
-		// and right of mid 
-		return left_sum + right_sum; 
-	} 
-
-	// Returns sum of maxium sum subarray 
-	// in aa[l..h] 
-	static int maxSubArraySum(int arr[], int l, 
-									int h) 
-	{ 
-	// Base Case: Only one element 
-	if (l == h) 
-		return arr[l]; 
-
-	// Find middle point 
-	int m = (l + h)/2; 
-
-	/* Return maximum of following three 
-	possible cases: 
-	a) Maximum subarray sum in left half 
-	b) Maximum subarray sum in right half 
-	c) Maximum subarray sum such that the 
-	subarray crosses the midpoint */
-	return Math.max(Math.max(maxSubArraySum(arr, l, m), 
-					maxSubArraySum(arr, m+1, h)), 
-					maxCrossingSum(arr, l, m, h)); 
-	} 
-
-	/* Driver program to test maxSubArraySum */
-	public static void main(String[] args) 
-	{ 
-	int arr[] = {2, 3, 4, 5, 7}; 
-	int n = arr.length; 
-	int max_sum = maxSubArraySum(arr, 0, n-1); 
+class MaxSubarray {
 	
-	System.out.println("Maximum contiguous sum is "+ 
-										max_sum); 
-	} 
-} 
-// This code is contributed by Prerna Saini 
+  static Test maxCrossingSubarray(int ar[], int low, int mid, int high)
+  {
+    /*
+      Initial leftSum should be -infinity.
+    */
+    int leftSum = Integer.MIN_VALUE;
+    int sum = 0;
+    int i;
+
+   
+    int maxleft=0;
+    for (i=mid; i>=low; i--)
+    { 
+      sum = sum+ar[i];
+      if (sum>leftSum)
+      {
+        leftSum = sum;
+        maxleft=i;
+        
+      }
+         
+    }
+
+    
+    int rightSum = Integer.MIN_VALUE;
+    sum = 0;
+    int rightmax=0;
+
+    for (i=mid+1; i<=high; i++)
+    {
+      sum=sum+ar[i];
+      if (sum>rightSum)
+        rightSum = sum;
+      rightmax=i;
+     
+    }
+
+    /*
+      returning the maximum sum of the subarray
+      containing the middle element.
+    */
+   Test t1=new Test(maxleft, rightmax,leftSum+rightSum );
+    return t1;
+  }
+
+  // function to calculate the maximum subarray sum
+  static Test maxSumSubarray(int ar[], int low, int high)
+  {
+	  
+    if (high == low) // only one element in an array
+    {
+    	return  new Test( low, high,ar[high]);
+      
+    }
+
+    // middle element of the array
+    int mid = (high+low)/2;
+    System.out.println();
+    // maximum sum in the left subarray
+    
+    Test maximumSumLeftSubarray = maxSumSubarray(ar, low, mid);
+    // maximum sum in the right subarray
+    Test maximumSumRightSubarray = maxSumSubarray(ar, mid+1, high);
+    // maximum sum in the array containing the middle element
+    Test t1 = maxCrossingSubarray(ar, low, mid, high);
+
+    // returning the maximum among the above three numbers
+    return Test.maximum(maximumSumLeftSubarray, maximumSumRightSubarray, t1);
+  }
+
+  public static void main(String[] args) {
+    int a[] = {  -3, -2, 4,3, -1, -1, 10};
+  
+    
+  
+    Test maxsom=maxSumSubarray(a, 0, a.length-1);
+    
+   
+    System.out.println("max value:"+maxsom.sum+"indexes start:"+maxsom.leftmax+"indexes end:"+maxsom.rightmax);
+  }
+}
