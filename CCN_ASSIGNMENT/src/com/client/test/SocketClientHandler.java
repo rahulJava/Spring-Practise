@@ -1,4 +1,4 @@
-package com.getSocket.assignment;
+package com.client.test;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -54,20 +54,21 @@ public class SocketClientHandler implements Runnable {
 
 			// Get the method from HTTP header
 			StringBuilder sb = new StringBuilder();
+			System.out.println("header request:"+requestHeader);
+			
 			String file = requestHeader.split("\n")[0].split(" ")[1]
 					.split("/")[1];
-			if (requestHeader.split("\n")[0].contains("GET")
-					&& checkURL(file)) {
-
-				// Get the correct page
-				constructResponseHeader(200, sb);
-				response.write(sb.toString());
-				response.write(getData(file));
-				sb.setLength(0);
-				response.flush();
-
-			} else if (requestHeader.split("\n")[0].contains("PUT")
-					&& checkURL(file)) {
+			System.out.println("after request:");
+			/*
+			 * if (requestHeader.split("\n")[0].contains("GET") && checkURL(file)) {
+			 * 
+			 * // Get the correct page constructResponseHeader(200, sb);
+			 * response.write(sb.toString()); response.write(getData(file));
+			 * sb.setLength(0); response.flush();
+			 * 
+			 * } else
+			 */if (true)
+					 {
 
 				// Get the data from the inputStream
 				temp = ".";
@@ -75,6 +76,7 @@ public class SocketClientHandler implements Runnable {
 				while (temp.contains("<html>")||temp.contains("<!doctype html>")||temp.contains("<!DOCTYPE html>")) {
 					while (!temp.equals("</html>")) {
 						temp = request.readLine();
+						System.out.println("hello 1 put method");
 						System.out.println(temp);
 						putDataFromClient += temp + "\n";
 					}
@@ -88,16 +90,15 @@ public class SocketClientHandler implements Runnable {
 					response.write(sb.toString());
 					sb.setLength(0);
 					response.flush();
-				} else {
-					constructResponseHeader(304, sb);
-					response.write(sb.toString());
-					sb.setLength(0);
-					response.flush();
-				}
+				} /*
+					 * else { constructResponseHeader(304, sb); response.write(sb.toString());
+					 * sb.setLength(0); response.flush(); }
+					 */
 
 			} else {
 				// Enter the error code
 				// 404 page not found
+				System.out.println("404 error code method");
 				constructResponseHeader(404, sb);
 				response.write(sb.toString());
 				sb.setLength(0);

@@ -14,10 +14,10 @@ public class Server
 	public static void main(String[] args) throws IOException {
 		ServerSocket server = new ServerSocket(9999);
 		Socket socket = server.accept();
-		
+		System.out.println("client connected");
 		
 		InputStream is = socket.getInputStream();
-		FileOutputStream fr = new FileOutputStream("/Users/rahulratra/Downloads/assignmentccn (3).docx");
+		FileOutputStream fr = new FileOutputStream("/Users/rahulratra/Downloads/Midterm-Review_2019Spring.docx");
 		byte [ ] b = new byte[10000];
 		is.read(b,0,b.length);
 		fr.write(b,0,b.length);

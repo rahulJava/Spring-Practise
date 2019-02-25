@@ -1,13 +1,13 @@
- class Test
+ class MaiximumSubArrayInfo
   {
 	  int leftmax , rightmax,sum;
-	  public Test(int a1,int b1,int c1)
+	  public MaiximumSubArrayInfo(int a1,int b1,int c1)
 	  {
 		  leftmax=a1;
 		  rightmax=b1;
 		  sum=c1;
 	  }
-	  static Test maximum(Test a, Test b, Test c)
+	  static MaiximumSubArrayInfo maximum(MaiximumSubArrayInfo a, MaiximumSubArrayInfo b, MaiximumSubArrayInfo c)
 	  {
 	    if (a.sum>=b.sum && a.sum>=c.sum)
 	      return a;
