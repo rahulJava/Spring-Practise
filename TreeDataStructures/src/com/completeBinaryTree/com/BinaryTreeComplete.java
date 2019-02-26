@@ -44,12 +44,12 @@ public class BinaryTreeComplete {
  
     private TreeNode createCompleteTree()
     {
-        this.root = new TreeNode(1);
-        TreeNode n1   = new TreeNode(2);
-        TreeNode n2   = new TreeNode(3);
-        TreeNode n3   = new TreeNode(4);
-        TreeNode n4   = new TreeNode(5);
-        TreeNode n5   = new TreeNode(6);
+        this.root = new TreeNode(97);
+        TreeNode n1   = new TreeNode(46);
+        TreeNode n2   = new TreeNode(37);
+        TreeNode n3   = new TreeNode(12);
+        TreeNode n4   = new TreeNode(3);
+        TreeNode n5   = new TreeNode(7);
          
         root.left  = n1;
         root.right = n2;
@@ -73,13 +73,13 @@ public class BinaryTreeComplete {
  
     private TreeNode createIncompleteTree()
     {
-        this.root = new TreeNode(1);
-        TreeNode n1   = new TreeNode(2);
+        this.root = new TreeNode(5);
+        TreeNode n1   = new TreeNode(3);
         TreeNode n2   = new TreeNode(3);
-        TreeNode n3   = new TreeNode(4);
-        TreeNode n4   = new TreeNode(5);
-        TreeNode n5   = new TreeNode(6);
-        TreeNode n6   = new TreeNode(7);
+        TreeNode n3   = new TreeNode(1);
+        TreeNode n4   = new TreeNode(0);
+        TreeNode n5   = new TreeNode(1);
+        TreeNode n6   = new TreeNode(0);
          
         root.left  = n1;
         root.right = n2;
@@ -141,16 +141,56 @@ public class BinaryTreeComplete {
         }
         return true;
     }
+    boolean isHeap(TreeNode root) 
+    { 
+        if(root == null) 
+            return true; 
+          
+        // These two are used in isCompleteUtil() 
+        
+        System.out.println("tree is complete or not:"+checkIfComplete());
+        System.out.println("tree is heap:"+isHeapUtil(root));
+          
+        if(checkIfComplete()==true && isHeapUtil(root)==true) 
+            return true; 
+        return false; 
+    } 
      
+    boolean isHeapUtil(TreeNode root) 
+    { 
+        //  Base case : single node satisfies property 
+        if(root.left == null && root.right==null) 
+            return true; 
+          
+        //  node will be in second last level 
+        if(root.right == null) 
+        { 
+            //  check heap property at Node 
+            //  No recursive call , because no need to check last level 
+            return root.val >= root.left.val; 
+        } 
+        else
+        { 
+            //  Check heap property at Node and 
+            //  Recursive check heap property at left and right subtree 
+            if(root.val >= root.left.val && root.val >= root.right.val) 
+                return isHeapUtil(root.left) && isHeapUtil(root.right); 
+            else
+                return false; 
+        } 
+    } 
+    
     public static void main(String[] args)
     {
         BinaryTreeComplete tree = new BinaryTreeComplete();
          
-        tree.createCompleteTree();
-        System.out.println(tree.checkIfComplete());
-         
-        tree.createIncompleteTree();
-        System.out.println(tree.checkIfComplete());
+       TreeNode root = tree.createCompleteTree();
+//        System.out.println(tree.checkIfComplete());
+//        
+//        tree.createIncompleteTree();
+//        System.out.println(tree.checkIfComplete());
+        
+        System.out.println(tree.isHeap(root));
  
     }
 }
