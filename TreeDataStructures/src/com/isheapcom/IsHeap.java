@@ -1,4 +1,4 @@
-package com.completeBinaryTree.com;
+package com.isheapcom;
 
 import java.util.LinkedList;
  
@@ -9,7 +9,7 @@ import java.util.LinkedList;
  * @author Nilesh
  */
  
-public class BinaryTreeComplete {
+public class IsHeap {
  
     class QueueNode
     {
@@ -182,7 +182,7 @@ public class BinaryTreeComplete {
     
     public static void main(String[] args)
     {
-        BinaryTreeComplete tree = new BinaryTreeComplete();
+        IsHeap tree = new IsHeap();
          
        TreeNode root = tree.createCompleteTree();
 //        System.out.println(tree.checkIfComplete());

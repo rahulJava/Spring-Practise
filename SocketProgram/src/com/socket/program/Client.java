@@ -1,24 +1,34 @@
 package com.socket.program;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
-public class Client 
-{
-	public static void main(String[] args) throws IOException {
+public class Client {
+
+	public static void main(String[] args) throws UnknownHostException, IOException {
+
+		Socket sock = new Socket("127.0.0.1", 9999);
+		System.out.println("Connected to the server..");
+
+		String product = "sadfsdf";
 		
-		Socket soc = new Socket("localhost",9999);
-		System.out.println("server accepted request");
-		FileInputStream fr = new FileInputStream("/Users/rahulratra/Downloads/shilparesent.docx");
-		byte[] b = new byte[2002];
-		fr.read(b,0,b.length);
-		OutputStream write = soc.getOutputStream();
+		InputStream in = sock.getInputStream();
+		OutputStream out = sock.getOutputStream();
 		
+		System.out.println("Sending product information..");
+		out.write(product.getBytes());
 		
+		byte [] response = new byte[100];
+		in.read(response);
+		
+		String strResponse = new String(response).trim();
+		
+		System.out.println("Obtained response is - " + strResponse);
+		
+		sock.close();
 		
 	}
 

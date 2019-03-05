@@ -1,5 +1,3 @@
-package com.getSocket.assignment;
-
 //import java.io.BufferedReader;
 //import java.io.BufferedWriter;
 //import java.io.File;
@@ -28,13 +26,13 @@ package com.getSocket.assignment;
 //		Socket client = null;
 //		
 //		while(true){
-//      	System.out.println("Waiting for clients...");
-//      	client = serverSocket.accept();
-//      	System.out.println("The following client has connected:"+client.getInetAddress().getCanonicalHostName());
-//      	//A client has connected to this server. Send welcome message
-//          Thread thread = new Thread(new SocketClientHandler(client));
-//          thread.start();
-//      }    
+//        	System.out.println("Waiting for clients...");
+//        	client = serverSocket.accept();
+//        	System.out.println("The following client has connected:"+client.getInetAddress().getCanonicalHostName());
+//        	//A client has connected to this server. Send welcome message
+//            Thread thread = new Thread(new SocketClientHandler(client));
+//            thread.start();
+//        }    
 //		
 //		try {
 //			System.out.println("Waiting for Clients...");

@@ -1,5 +1,3 @@
-package com.getSocket.assignment;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -87,6 +85,7 @@ public class Client {
 
 		// Send the Data to be PUT
 		String htmlContent = readHtmlFile(file);
+		System.out.println("html content:"+htmlContent);
 		request.println(htmlContent);
 		request.flush();
 
@@ -108,19 +107,18 @@ public class Client {
 
 	private static String readHtmlFile(String file) {
 		
-		BufferedReader reader;
-		StringBuilder stringBuilder = new StringBuilder();
+		 StringBuilder sb = new StringBuilder();
 		try {
-			reader = new BufferedReader(new FileReader(file));
-			String line = null;
-			String ls = System.getProperty("line.separator");
+			BufferedReader br = new BufferedReader(new FileReader(file));
+		   
 
-			while ((line = reader.readLine()) != null) {
-				stringBuilder.append(line);
-				stringBuilder.append(ls);
-			}
-			reader.close();
-			
+		    String line = br.readLine();
+		    while (line != null) {
+		      sb.append(line).append("\n");
+		      line = br.readLine();
+		    }
+
+		    String fileAsString = sb.toString();
 			
 		} catch (FileNotFoundException e) {
 			
@@ -139,6 +137,6 @@ public class Client {
 //			stringBuilder.append("File has no text!");
 //			return stringBuilder.toString();
 		}
-		return stringBuilder.toString();
+		return sb.toString();
 	}
 }
