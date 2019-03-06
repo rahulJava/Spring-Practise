@@ -10,9 +10,9 @@ class MyServer {
 	 */
 	
 	public static void main(String[] args) throws InterruptedException {
-		int portNumber = Integer.parseInt(args[0]);
+		//int portNumber = Integer.parseInt(args[0]);
 
-//		int portNumber = 9898;
+           int portNumber = 9898;
 		try {
 			// initializing the Socket Server
 			MultiThreadedServer socketServer = new MultiThreadedServer(

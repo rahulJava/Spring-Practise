@@ -25,7 +25,7 @@ public class SocketClientHandler implements Runnable {
 		try {
 			System.out.println("Thread started with name123456:"
 					+ Thread.currentThread().getName());
-			System.out.println("line 26");
+			System.out.println("line 28");
 			readResponse();
 			return;
 		} catch (IOException e) {

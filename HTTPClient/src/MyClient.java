@@ -5,15 +5,15 @@ public class MyClient {
 
 	public static void main(String[] args) throws IOException {
 
-		String host = args[0];
-		int port = Integer.parseInt(args[1]);
-		String command = args[2];
-		String path = args[3];
+//		String host = args[0];
+//		int port = Integer.parseInt(args[1]);
+//		String command = args[2];
+//		String path = args[3];
 
-//		String host = "localhost";
-//		int port = 9898;
-//		String command = "PUT";
-		//String path = "/Users/rahulratra/Documents/HTTPclient-server-master/HTTPClient/src/Test1.txt";
+		String host = "localhost";
+		int port = 9898;
+		String command = "PUT";
+		String path = "/Users/rahulratra/git/SpringDemo/HTTPClient/src/Test1.txt";
 		
 		// Method Check GET or PUT
 		if ("GET".equals(command)) {

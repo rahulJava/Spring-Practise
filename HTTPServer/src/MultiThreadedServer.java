@@ -27,7 +27,7 @@ public class MultiThreadedServer {
 			
 			System.out.println("Waiting for clients...");
 			client = serverSocket.accept();
-			System.out.println("The following client has connected:"
+			System.out.println("The following client has connected to the server:"
 					+ client.getInetAddress().getCanonicalHostName());
 			// A client has connected to this server. Send welcome message
 			Thread thread = new Thread(new SocketClientHandler(client));
