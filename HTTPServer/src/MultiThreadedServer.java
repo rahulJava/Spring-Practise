@@ -7,6 +7,7 @@ import java.net.Socket;
  * 
  */
 public class MultiThreadedServer {
+	private static final byte END_WAITING = 66;	
 
 	private ServerSocket serverSocket;
 	private int port;
@@ -22,7 +23,8 @@ public class MultiThreadedServer {
 
 		Socket client = null;
 
-		while (true) {
+		while (true) {	
+			
 			System.out.println("Waiting for clients...");
 			client = serverSocket.accept();
 			System.out.println("The following client has connected:"
