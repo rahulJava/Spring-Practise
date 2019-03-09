@@ -15,10 +15,12 @@ public class SocketClientHandler implements Runnable {
 
 	private Socket client;
 	private int i=0;
+	public static boolean ifsignalreceived=false;
 
 	public SocketClientHandler(Socket client) {
 		this.client = client;
 	}
+	
 
 	@Override
 	public void run() {
@@ -35,6 +37,11 @@ public class SocketClientHandler implements Runnable {
 		}
 	}
 
+	public static boolean returnSignlaValue()
+	{
+		System.out.println("line no 41:"+ifsignalreceived);
+		return ifsignalreceived;
+	}
 	private void readResponse() throws IOException, InterruptedException {
 
 		try {
@@ -52,6 +59,17 @@ public class SocketClientHandler implements Runnable {
 			while (!temp.equals("")) {
 				temp = request.readLine();
 				System.out.println(temp);
+				if(temp.equals("66"))
+				{
+					requestHeader=temp;
+					System.out.println("i am in line 71");
+					request.close();
+					client.close();
+					ifsignalreceived=true;
+					System.out.println("line no 69:"+ifsignalreceived);
+					return ;
+					
+				}
 				requestHeader += temp + "\n";
 			}
 			System.out.println("Line 55:"+requestHeader);
@@ -122,7 +140,7 @@ public class SocketClientHandler implements Runnable {
 			response.close();
 
 			client.close();
-			return;
+			return ;
 		} catch (Exception e) {
 			System.out.println("exception trace:::"+e.getMessage());
 		}
@@ -142,7 +160,7 @@ public class SocketClientHandler implements Runnable {
 	}
 
 	// Construct Response Header
-	private static void constructResponseHeader(int responseCode,
+	public static void constructResponseHeader(int responseCode,
 			StringBuilder sb) {
 
 		if (responseCode == 200) {
@@ -165,6 +183,15 @@ public class SocketClientHandler implements Runnable {
 			sb.append("Server:localhost\r\n");
 			sb.append("\r\n");
 		}
+		else if (responseCode == 201) {
+
+			sb.append("HTTP/1.1 200 OK\r\n");
+			sb.append("Date:" + getTimeStamp() + "\r\n");
+			sb.append("Server:localhost\r\n");
+			sb.append("Content-Type: text/html\r\n");
+			sb.append("Server Connection: now Closed\r\n\r\n");
+		}
+		
 	}
 
 	// PUT data to file ServerIndex.htm

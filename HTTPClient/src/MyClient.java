@@ -5,10 +5,25 @@ public class MyClient {
 
 	public static void main(String[] args) throws IOException {
 
-		String host = args[0];
-		int port = Integer.parseInt(args[1]);
-		String command = args[2];
-		String path = args[3];
+		String host="";
+		int port=0;
+		String command ="";
+		String path="";
+		int signal=0;
+		if(args.length==4)
+		{
+		 host = args[0];
+	     port = Integer.parseInt(args[1]);
+		command = args[2];
+	     path = args[3];
+		}
+		else
+		{
+			 host = args[0];
+			 port = Integer.parseInt(args[1]);
+			 signal=Integer.parseInt(args[2]);
+		}
+		
 //
 //		String host = "localhost";
 //		int port = 9898;
@@ -20,7 +35,11 @@ public class MyClient {
 			Client.getMethod(host, port, path);
 		} else if ("PUT".equals(command)) {
 			Client.putMethod(host, port, path);
-		}else{
+		}
+		else if(signal==66) {
+			Client.terminateServerSignal(host, port, signal);
+		}
+		else{
 			System.out.println("Check the HTTP command! It should be either GET or PUT");
 			return;
 		}

@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -29,10 +31,32 @@ public class MultiThreadedServer {
 			client = serverSocket.accept();
 			System.out.println("The following client has connected to the server:"
 					+ client.getInetAddress().getCanonicalHostName());
+			Thread t = Thread.currentThread(); 
+			
+			System.out.println("Current thread: " + t.getName());
 			// A client has connected to this server. Send welcome message
 			Thread thread = new Thread(new SocketClientHandler(client));
 			thread.start();
+			try
+	        { 
+	            System.out.println("Current Thread: "
+	                  + Thread.currentThread().getName()); 
+	            thread.join(); 
+	        } 
+	  
+	        catch(Exception ex) 
+	        { 
+	            System.out.println("Exception has " + 
+	                                "been caught" + ex); 
+	        } 
+			System.out.println("line no 37:"+SocketClientHandler.returnSignlaValue());
+			if(SocketClientHandler.returnSignlaValue())
+			{
+				break;
+			}
 		}
+		System.out.println("Out of the while loop");
+		serverSocket.close();
 	}
 
 }

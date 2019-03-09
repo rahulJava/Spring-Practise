@@ -53,6 +53,22 @@ public class Client {
 		clientSocket.close();
 	}
 
+	public static void terminateServerSignal(String host,int port ,int signal) throws UnknownHostException, IOException
+	{
+		Socket clientSocket = null;
+		clientSocket = new Socket(host, port);
+		System.out.println("======================================");
+		System.out.println("Connected");
+		System.out.println("======================================");
+		PrintWriter request = new PrintWriter(clientSocket.getOutputStream(),
+				true);
+		request.print(signal);
+		request.flush();
+		System.out.println("Request Sent!");
+		System.out.println("======================================");
+		request.close();
+		clientSocket.close();
+	}
 	public static void putMethod(String host, int port, String file)
 			throws UnknownHostException, IOException {
 
