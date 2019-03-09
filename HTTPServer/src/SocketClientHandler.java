@@ -97,7 +97,7 @@ public class SocketClientHandler implements Runnable {
 				// PUT the data to file serverIndex.html
 				if (dataStream != "") {
 					System.out.println("line no 96");
-					int responseCode = putData(dataStream, file);
+					int responseCode = putData(dataStream);
 					constructResponseHeader(responseCode, sb);
 					response.write(sb.toString());
 					sb.setLength(0);
@@ -168,10 +168,10 @@ public class SocketClientHandler implements Runnable {
 	}
 
 	// PUT data to file ServerIndex.htm
-	private static int putData(String putDataFromClient, String file)
+	private static int putData(String putDataFromClient)
 			throws IOException {
 
-		return writeHtmlFile(putDataFromClient, file);
+		return writeHtmlFile(putDataFromClient);
 	}
 
 
@@ -210,11 +210,11 @@ public class SocketClientHandler implements Runnable {
 		return sb.toString();
 	}
 	// Write the data to server - Helper method for putData method
-	private static int writeHtmlFile(String putDataFromClient, String file) {
+	private static int writeHtmlFile(String putDataFromClient) {
 
 		System.out.println("line 204:"+putDataFromClient);
-		System.out.println("location of the file:"+file);
-		File myFile = new File(file+System.currentTimeMillis()+".txt");
+		System.out.println("location of the file:");
+		File myFile = new File("/Users/rahulratra/git/SpringDemo/HTTPServer/src/"+System.currentTimeMillis()+".txt");
 		BufferedWriter writer;
 		try {
 			writer = new BufferedWriter(new FileWriter(myFile));
