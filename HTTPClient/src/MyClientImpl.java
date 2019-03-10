@@ -7,12 +7,13 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class Client {
+public class MyClientImpl {
 
+	// this method handles get request from the client
 	public static void getMethod(String host, int port, String path)
 			throws IOException {
 
-		// Opening Connection based on the port number 80(HTTP) and 443(HTTPS)
+		// Opening Connection based on the port number 80(HTTP)
 		Socket clientSocket = null;
 		clientSocket = new Socket(host, port);
 
@@ -53,26 +54,11 @@ public class Client {
 		clientSocket.close();
 	}
 
-	public static void terminateServerSignal(String host,int port ,int signal) throws UnknownHostException, IOException
-	{
-		Socket clientSocket = null;
-		clientSocket = new Socket(host, port);
-		System.out.println("======================================");
-		System.out.println("Connected");
-		System.out.println("======================================");
-		PrintWriter request = new PrintWriter(clientSocket.getOutputStream(),
-				true);
-		request.print(signal);
-		request.flush();
-		System.out.println("Request Sent!");
-		System.out.println("======================================");
-		request.close();
-		clientSocket.close();
-	}
+	// this method handles put request from the client
 	public static void putMethod(String host, int port, String file)
 			throws UnknownHostException, IOException {
 
-		// Opening Connection based on the port number 80(HTTP) and 443(HTTPS)
+		// Opening Connection based on the port number 80(HTTP)
 		Socket clientSocket = null;
 		clientSocket = new Socket(host, port);
 
@@ -100,8 +86,8 @@ public class Client {
 		System.out.println("======================================");
 
 		// Send the Data to be PUT
-		String htmlContent = readHtmlFile(file);
-		System.out.println("html content:"+htmlContent);
+		String htmlContent = readFile(file);
+		System.out.println("html content:" + htmlContent);
 		request.println(htmlContent);
 		request.flush();
 
@@ -121,37 +107,55 @@ public class Client {
 		clientSocket.close();
 	}
 
-	private static String readHtmlFile(String file) {
-		
-		 StringBuilder sb = new StringBuilder();
+	// this method handles terminate signal request
+	public static void terminateServerSignal(String host, int port, int signal)
+			throws UnknownHostException, IOException {
+		Socket clientSocket = null;
+		clientSocket = new Socket(host, port);
+		System.out.println("======================================");
+		System.out.println("Connected");
+		System.out.println("======================================");
+		PrintWriter request = new PrintWriter(clientSocket.getOutputStream(),
+				true);
+		request.print(signal);
+		request.flush();
+		System.out.println("Request Sent!");
+		System.out.println("======================================");
+		request.close();
+		clientSocket.close();
+	}
+
+	// this method reads the file content to sent to the server
+	private static String readFile(String file) {
+
+		StringBuilder sb = new StringBuilder();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
-		   
 
-		    String line = br.readLine();
-		    while (line != null) {
-		      sb.append(line).append("\n");
-		      line = br.readLine();
-		    }
+			String line = br.readLine();
+			while (line != null) {
+				sb.append(line).append("\n");
+				line = br.readLine();
+			}
 
-		    String fileAsString = sb.toString();
-			
+			String fileAsString = sb.toString();
+
 		} catch (FileNotFoundException e) {
-			
+
 			System.err.println(e.getMessage());
 			System.out.println("Client side issue with file name");
 			System.exit(1);
-//			stringBuilder.setLength(0);
-//			stringBuilder.append("Check the file name!");
-//			return stringBuilder.toString();
-			
+			// stringBuilder.setLength(0);
+			// stringBuilder.append("Check the file name!");
+			// return stringBuilder.toString();
+
 		} catch (IOException e) {
-			
+
 			System.err.println(e.getMessage());
 			System.exit(1);
-//			stringBuilder.setLength(0);
-//			stringBuilder.append("File has no text!");
-//			return stringBuilder.toString();
+			// stringBuilder.setLength(0);
+			// stringBuilder.append("File has no text!");
+			// return stringBuilder.toString();
 		}
 		return sb.toString();
 	}

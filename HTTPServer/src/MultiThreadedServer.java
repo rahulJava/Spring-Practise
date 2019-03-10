@@ -4,12 +4,7 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-/**
- * A simple socket server
- * 
- */
 public class MultiThreadedServer {
-	private static final byte END_WAITING = 66;	
 
 	private ServerSocket serverSocket;
 	private int port;
@@ -25,38 +20,39 @@ public class MultiThreadedServer {
 
 		Socket client = null;
 
-		while (true) {	
-			
+		while (true) {
+
 			System.out.println("Waiting for clients...");
 			client = serverSocket.accept();
-			System.out.println("The following client has connected to the server:"
-					+ client.getInetAddress().getCanonicalHostName());
-			Thread t = Thread.currentThread(); 
-			
+			System.out
+					.println("The following client has connected to the server:"
+							+ client.getInetAddress().getCanonicalHostName());
+			Thread t = Thread.currentThread();
+
 			System.out.println("Current thread: " + t.getName());
-			// A client has connected to this server. Send welcome message
+			// A client has connected to this server
 			Thread thread = new Thread(new SocketClientHandler(client));
 			thread.start();
-			try
-	        { 
-	            System.out.println("Current Thread: "
-	                  + Thread.currentThread().getName()); 
-	            thread.join(); 
-	        } 
-	  
-	        catch(Exception ex) 
-	        { 
-	            System.out.println("Exception has " + 
-	                                "been caught" + ex); 
-	        } 
-			System.out.println("line no 37:"+SocketClientHandler.returnSignlaValue());
-			if(SocketClientHandler.returnSignlaValue())
-			{
+			try {
+				System.out.println("Current Thread: "
+						+ Thread.currentThread().getName());
+				thread.join();
+			}
+
+			catch (Exception ex) {
+				System.out.println("Exception has been caught" + ex);
+			}
+			System.out.println("SocketClientHandler.returnSignalValue() is:"
+					+ SocketClientHandler.returnSignalValue());
+			if (SocketClientHandler.returnSignalValue()) {
 				break;
 			}
 		}
 		System.out.println("Out of the while loop");
 		serverSocket.close();
+		System.out.println("======================================");
+		System.out.println("Server is shut down now!!");
+		System.out.println("======================================");
 	}
 
 }
