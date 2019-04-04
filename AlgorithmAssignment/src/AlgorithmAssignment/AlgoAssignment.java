@@ -59,10 +59,15 @@ public class AlgoAssignment {
         /*
          * Checking if particular value exist in the tableau.
          */
-        int key =69;
+        System.out.println("Enter the value thats need to be searched");
+        int key =scan.nextInt();
+        
         //Algorithm for checking if a value is there in young tableau in o(m+n) complexity
         boolean keyExists= search(tableau, key,matrixRow,matrixCol);
         System.out.println("key:"+key+"::"+keyExists);
+        
+        
+        sortYoungTableau(tableau, matrixRow, matrixCol);
 		
 	}
 	public static void insert(int tableau[][], int i, int j)
@@ -257,5 +262,16 @@ public class AlgoAssignment {
 
 		return false;
 	}
+	public static void sortYoungTableau(int[][] matrix, int matrixRow, int matrixCol){
+        
+        for (int i = 0; i < matrixRow; i++)
+        {
+            for (int j = 0; j < matrixCol; j++)
+            {
+                System.out.print(extractMin(matrix,matrixRow,matrixCol)+"\t");
+            }
+             
+        }
+  }
 
 }

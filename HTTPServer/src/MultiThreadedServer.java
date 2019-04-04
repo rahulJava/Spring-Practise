@@ -24,6 +24,7 @@ public class MultiThreadedServer {
 
 			System.out.println("Waiting for clients...");
 			client = serverSocket.accept();
+			
 			System.out
 					.println("The following client has connected to the server:"
 							+ client.getInetAddress().getCanonicalHostName());
