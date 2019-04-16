@@ -29,7 +29,7 @@ public class CoinChangeGreedy {
 
     public static void main (String[] args)
     {
-        int n = 200;
+        int n = 140;
         findMin(n);
     }
 }

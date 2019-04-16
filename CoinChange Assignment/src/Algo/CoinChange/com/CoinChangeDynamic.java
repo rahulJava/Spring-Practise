@@ -29,7 +29,7 @@ class CoinChangeDynamic
     {
         int denominations[] = {1, 5, 10, 25};
         int size = denominations.length;
-        int amount = 200;
+        int amount = 100;
         System.out.println( "Minimum Coins Required is : "
                 + minCoins(denominations, size, amount));
     }
