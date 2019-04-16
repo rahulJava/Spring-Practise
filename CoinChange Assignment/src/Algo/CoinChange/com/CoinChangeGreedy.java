@@ -18,7 +18,7 @@ public class CoinChangeGreedy {
                 arr[k++] = max_coins;
             }
         }
-        System.out.println("Denominations of coins :"  );
+        System.out.println("Denominations of coins1 :"  );
 
         for (i = 0; i < k; i++) {
             System.out.println(arr[i]);
