@@ -8,9 +8,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
-//@Component("thatSillyCoach")
+/*
+ * add the component scan and the bean id you want to use 
+ * the spring container will use thatsillycoach
+ */
+//@Component("thatSillyCoach") 
 @Component
+/*
+ * will take the default bean id tennisCoach
+ */
 //@Scope("prototype")
 public class TennisCoach implements Coach {
        
@@ -25,7 +31,7 @@ public class TennisCoach implements Coach {
 	   // and will inject the instance of happyfortuneservice here
 	   @Autowired
 	   
-	   public TennisCoach(@Qualifier("happyFortuneService") FortuneService thefortuneService)
+	   public TennisCoach(@Qualifier("randomFortuneService") FortuneService thefortuneService)
 	   {
 		   fortuneService=thefortuneService;
 	   }

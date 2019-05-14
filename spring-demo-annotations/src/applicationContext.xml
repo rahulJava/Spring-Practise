@@ -11,8 +11,8 @@
 	
     
     
-   <!-- adding component scan -->
-   <context:component-scan base-package="com.luv2code.springdemo"></context:component-scan>
+   <!-- adding component scanning -->
+   <context:component-scan base-package="com.luv2code.springdemo"/>
    
    <bean id="myLoggerConfig" class="com.luv2code.springdemo.MyLoggerConfig" init-method="initLogger">
     	<property name="rootLoggerLevel" value="FINE" />

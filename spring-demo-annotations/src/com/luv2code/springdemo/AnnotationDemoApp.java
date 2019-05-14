@@ -16,7 +16,7 @@ public class AnnotationDemoApp {
 		System.out.println(usingFieldInjection.getDailyWorkOut());
 		System.out.println(usingFieldInjection.getDailyFortune());
 		System.out.println(theCoach.getDailyWorkOut());
-		System.out.println(theCoach.getDailyFortune());
+		System.out.println("random:"+thecoach1.getDailyFortune());
 		System.out.println(theCoach.getTeam());
 		System.out.println(theCoach.getEmailAddress());
 		context.close();

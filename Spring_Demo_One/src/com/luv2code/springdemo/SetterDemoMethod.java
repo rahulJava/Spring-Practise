@@ -13,6 +13,7 @@ public class SetterDemoMethod {
 		System.out.println(theCoach.getDailyFortunes());
 		System.out.println(theCoach.getEmailAddress());
 		System.out.println(theCoach.getTeam());
+		context.close();
 		
 		
 	}
