@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
+//no need of adding component scan here
 @ComponentScan("com.luv2code.springdemo")
 @PropertySource("classpath:sport.properties")
 public class SportConfig

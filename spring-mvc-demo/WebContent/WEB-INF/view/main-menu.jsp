@@ -1,7 +1,10 @@
-<!DOCTYPE html>
+<!DOCTYPE>
 <html>
+
 <body>
-<h2>Spring mvc demo page</h2>
-<a href="showForm"> Hello World Form</a>
+
+<h2>Spring MVC Demo - Home Page</h2>
+
 </body>
+
 </html>
