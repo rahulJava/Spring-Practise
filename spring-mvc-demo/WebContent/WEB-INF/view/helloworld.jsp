@@ -10,6 +10,10 @@
 Hello World of Spring!
 
 Student Name: ${param.studentName} 
+
+<br><br>
+The message: ${message}
+
 </form>
 </body>
 </html>
