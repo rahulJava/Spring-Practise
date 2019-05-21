@@ -12,9 +12,12 @@
 
 The customer is confirmed: ${customer.firstName} ${customer.lastName} 
 <br><br>
-${customer.freePasses}
+FressPasses:${customer.freePasses}
 <br><br>
-${customer.postalCode}
+Postal Code:${customer.postalCode}
+<br><br>
+CourseCode:${customer.courseCode}
+
 
 
 </body>
