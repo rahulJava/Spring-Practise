@@ -25,10 +25,13 @@
 	</bean>
 
 <!-- Load custom message resources -->
-<bean id ="messageSource"
-class = "org.springFramework.context.support.ResourceBundleMessageSource">
-<property name="basenames" value="resourxes/messages"/>
-</bean>
+
+
+<bean id="messageSource" 
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+     
+        <property name="basenames" value="resources/messages" />
+        </bean>
 </beans>
 
 
