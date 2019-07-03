@@ -13,7 +13,7 @@ public static void main(String[] args) {
 	try
 	{
 	
-		System.out.println("connect to database1");
+		System.out.println("connect to database");
 		Connection myconn= DriverManager.getConnection(jdbcurl,user,pass);
 		System.out.println("Connection Successful");
 	}
