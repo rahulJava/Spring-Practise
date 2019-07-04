@@ -10,6 +10,7 @@ public class AnnotationsScopeBeamDemoApp
 		Coach theCoach1 = context.getBean("tennisCoach",Coach.class);
 		boolean result=(theCoach==theCoach1);
 		System.out.println("result:"+result);
+		System.out.println("Hai Shri Ram");
 		System.out.println(theCoach.getDailyWorkOut());
 		
 		context.close();
