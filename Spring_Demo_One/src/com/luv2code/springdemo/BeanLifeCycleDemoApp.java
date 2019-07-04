@@ -14,7 +14,7 @@ public class BeanLifeCycleDemoApp {
 		
 		Coach theCoach = context.getBean("myCoach",Coach.class);
 		System.out.println(theCoach.getDailyworkout());
-		System.out.println("Main");
+		System.out.println("Main1");
 		context.close();
 		
 		
