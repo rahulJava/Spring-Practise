@@ -7,6 +7,7 @@ import javax.validation.constraints.Size;
 
 public class User 
 {
+	//Customized exception
 	private Integer ID;
 	@Size(min=2,message="name should have atleast two characters")
 	private String name;
