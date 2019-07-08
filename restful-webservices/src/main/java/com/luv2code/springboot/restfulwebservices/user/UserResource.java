@@ -3,6 +3,8 @@ package com.luv2code.springboot.restfulwebservices.user;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.parsing.Location;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +37,7 @@ public class UserResource
 		return user;
 	}
 	@PostMapping("/users")
-	public ResponseEntity<Object> createuser(@RequestBody User user )
+	public ResponseEntity<Object> createuser(@Valid @RequestBody User user )
 	{
 		User savedUser =service.save(user);
 		//Response entity used for returning the status code back
