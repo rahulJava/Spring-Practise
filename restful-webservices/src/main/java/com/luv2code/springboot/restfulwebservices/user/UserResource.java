@@ -2,11 +2,14 @@ package com.luv2code.springboot.restfulwebservices.user;
 
 import java.net.URI;
 import java.util.List;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.parsing.Location;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,14 +30,17 @@ public class UserResource
 		return service.findAll();
 	}
 	@GetMapping("/users/{id}")
-	public User retriveUser(@PathVariable int id)
+	public Resource<User> retriveUser(@PathVariable int id)
 	{
 		User user=service.findOne(id);
 		if(user==null)
 		{
 			throw new UsernotFoundException("id :"+id);
 		}
-		return user;
+		Resource<User> resource  = new Resource<User>(user);
+		ControllerLinkBuilder linkTo=linkTo(methodOn(this.getClass()).retriveAllUsers());
+		resource.add(linkTo.withRel("all-users"));
+		return resource;
 	}
 	@PostMapping("/users")
 	public ResponseEntity<Object> createuser(@Valid @RequestBody User user )
@@ -54,7 +60,10 @@ public class UserResource
 		if(user==null)
 		{
 			throw new UsernotFoundException("id :"+id);
+			
+			
 		}
+	
 	
 	}
 }
