@@ -31,6 +31,8 @@ public class UserJpaResource
 	private UserDaoService service;
 	@Autowired 
 	private UserRepository userRepository;
+	@Autowired
+	PostRepository postReository;
 	@GetMapping("/jpa/users")
 	public List<User> retriveAllUsers()
 	{
@@ -60,9 +62,40 @@ public class UserJpaResource
 		.buildAndExpand(savedUser.getID()).toUri();
 		return ResponseEntity.created(location).build();
 	}
+	@PostMapping("/jpa/users/{id}/posts")
+	public ResponseEntity<Object> createost(@PathVariable int id, @RequestBody Post post )
+	{
+		Optional<User> user=userRepository.findById(id);
+		if(!user.isPresent())
+		{
+			throw new UsernotFoundException("id :"+id);
+		}
+		User User1 = user.get();
+		post.setUser(User1);
+		postReository.save(post);
+		URI location=ServletUriComponentsBuilder
+				.fromCurrentRequestUri()
+				.path("/{id}")
+				.buildAndExpand(post.getId()).
+				toUri();
+		
+		return ResponseEntity.created(location).build();
+	}
 	@DeleteMapping("/jpa/users/{id}")
 	public void deleteUser(@PathVariable int id)
 	{
 		userRepository.deleteById(id);
+	}
+	@GetMapping("/jpa/users/{id}/posts")
+	public List<Post> retriveAllUsers(@PathVariable int id)
+	{
+		Optional<User> user =userRepository.findById(id);
+		if(!user.isPresent())
+		{
+			throw new UsernotFoundException("id:"+id);
+		}
+		
+		return user.get().getPosts();
+		
 	}
 }
