@@ -2,15 +2,25 @@ package com.luv2code.springboot.restfulwebservices.user;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description="All details about the user")
+@Entity
 public class User 
 {
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	//Customized exception
+	@Id
+	@GeneratedValue
 	private Integer ID;
 	@Size(min=2,message="name should have atleast two characters")
 	@ApiModelProperty("name should have atleast two characters")
