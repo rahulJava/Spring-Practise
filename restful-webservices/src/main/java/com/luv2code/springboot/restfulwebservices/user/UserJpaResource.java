@@ -84,6 +84,7 @@ public class UserJpaResource
 	@DeleteMapping("/jpa/users/{id}")
 	public void deleteUser(@PathVariable int id)
 	{
+		System.out.println("Last Comment");
 		userRepository.deleteById(id);
 	}
 	@GetMapping("/jpa/users/{id}/posts")
