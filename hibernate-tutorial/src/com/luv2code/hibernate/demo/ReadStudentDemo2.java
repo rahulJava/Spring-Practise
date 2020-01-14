@@ -25,7 +25,9 @@ public class ReadStudentDemo2 {
 			// start the transaction
 			session.beginTransaction();
 			System.out.println("Saving the student" + tempstudent);
+			System.out.println("-----------------------");
 			session.save(tempstudent);
+			System.out.println("-----------------------");
 			// commit transaction
 
 			session.getTransaction().commit();
@@ -34,6 +36,7 @@ public class ReadStudentDemo2 {
 			/*
 			 * now get a new session for gettting the data from database.
 			 */
+			System.out.println("------------------------------------");
 			session = factory.getCurrentSession();
 			session.beginTransaction();
 			System.out.println("temp student id:" + tempstudent.getId());

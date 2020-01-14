@@ -26,23 +26,24 @@ public class QueryStudentDemo
 			session.beginTransaction();
 			// query students
 			
-			List<Student> theStudents = session.createQuery("from Student").getResultList();
+			List<Student> theStudents = session.createQuery("from Student").list();
 			//display the students
 			
 			displayMethod(theStudents);
 			System.out.println("---------");
 			// query students with lastname Bharadwaj
-			theStudents=session.createQuery("from Student s where s.firstName ='Nitin'").getResultList();
+			theStudents=session.createQuery("from Student s where s.firstName ='Nitin'").list();
 			System.out.println("line no 35");
 			displayMethod(theStudents);
 			
 			System.out.println();
 			//query students lastname Bharadwaj or firstname daffy
 			
-			theStudents=session.createQuery("from Student s where s.lastName='Bharadwaj' or s.firstName='sankhi'").getResultList();
+			theStudents=session.createQuery("from Student s where s.lastName='Bharadwaj'"+ "or s.firstName='sankhi'").getResultList();
+			System.out.println("concated");
 			displayMethod(theStudents);
 			System.out.println();
-			theStudents=session.createQuery("from Student s where s.email like '%uncc.edu'").getResultList();
+			theStudents=session.createQuery("from Student s where s.email like '%uncc.edu'").list();
 			displayMethod(theStudents);
 			// commit transaction
 			
