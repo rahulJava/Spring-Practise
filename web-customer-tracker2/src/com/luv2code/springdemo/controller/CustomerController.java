@@ -59,7 +59,7 @@ public class CustomerController {
 		customer theCustomer = customerService.getCustomers(theID);
 		//set customer as model attribute to pre-populate the form
 		theModel.addAttribute("customer",theCustomer);
-		//send ot over to our form
+		//send ot over to our form1
 		return "customer-form";
 	}
 	
