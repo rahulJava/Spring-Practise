@@ -21,7 +21,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	private SessionFactory sessionFactory;
 	
 	@Override
-	@Transactional
+	//@Transactional
 	public List<customer> getCustomers() {
 		//get the current hibernate session
 		
@@ -29,7 +29,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		
 		System.out.println("Inside line no 29");
 		//create query
-		 Query<customer> theQuery= currentSession.createQuery("from customer",customer.class);
+		 Query<customer> theQuery= currentSession.createQuery("from customer order by lastName",customer.class);
 		
 		//execute query
 		 List<customer> customerList = theQuery.getResultList();
@@ -37,6 +37,37 @@ public class CustomerDaoImpl implements CustomerDao {
 		// return the customer
 		
 		 return customerList;
+	}
+
+	@Override
+	@Transactional
+	public void saveCustomer(customer theCustomer) {
+		// TODO Auto-generated method stub
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		currentSession.saveOrUpdate(theCustomer);
+		
+	}
+
+	@Override
+	@Transactional
+	public customer getCustomers(int theID) {
+		// TODO Auto-generated method stub
+		Session currentSession = sessionFactory.getCurrentSession();
+		 //Query<customer> theQuery= currentSession.createQuery("from customer order by lastName",customer.class);
+			customer theCustomer = currentSession.get(customer.class, theID);
+			return theCustomer;
+		
+	}
+
+	@Override
+	
+	public Object deleteCustomer(int theId) {
+		// TODO Auto-generated method stub
+		Session currentSession = sessionFactory.getCurrentSession();
+		customer theCustomer = currentSession.get(customer.class, theId);
+		currentSession.delete(theCustomer);
+		return null;
 	}
 
 }
